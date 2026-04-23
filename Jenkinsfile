@@ -9,7 +9,7 @@ pipeline {
 
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/Gurraiah123/Node-app.git'
+                git branch: 'main', url: 'https://github.com/Gurraiah123/Node-app.git'
             }
         }
 
