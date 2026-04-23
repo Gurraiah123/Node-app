@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs "NodeJS"
+        nodejs 'NodeJS'
     }
 
     stages {
@@ -30,8 +30,13 @@ pipeline {
                 sshagent(['ec2-ssh-key']) {
                     sh '''
                     ssh -o StrictHostKeyChecking=no ec2-user@3.66.225.75 '
+                        mkdir -p /home/ec2-user/app &&
                         cd /home/ec2-user/app &&
-                        git pull origin main &&
+                        if [ ! -d ".git" ]; then
+                            git clone https://github.com/Gurraiah123/Node-app.git .
+                        else
+                            git pull origin main
+                        fi &&
                         ./deploy.sh
                     '
                     '''
