@@ -9,7 +9,7 @@ pipeline {
 
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/YOUR_USERNAME/node-app.git'
+                git 'https://github.com/Gurraiah123/Node-app.git'
             }
         }
 
@@ -29,8 +29,8 @@ pipeline {
             steps {
                 sshagent(['ec2-ssh-key']) {
                     sh '''
-                    ssh -o StrictHostKeyChecking=no ubuntu@EC2_PUBLIC_IP '
-                        cd /home/ubuntu/app &&
+                    ssh -o StrictHostKeyChecking=no ec2-user@3.66.225.75 '
+                        cd /home/ec2-user/app &&
                         git pull origin main &&
                         ./deploy.sh
                     '
